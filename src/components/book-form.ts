@@ -1,6 +1,6 @@
 // Imports ===========================================================
 import type { Book } from "../types/book.js";
-//import { serviceName } from "../services/service-name.js";
+import * as BookService from "../services/book-service.js";
 
 // Variables =========================================================
 
@@ -27,8 +27,17 @@ function getFormData(): Book {
   if (!numberInput) {throw new Error('"#numberInput" element not found.');}
 
   return {
+    id: 0,
     name: nameInput.value.trim(),
-    number: Number(numberInput.value),
+    author: authorInput.value.trim(),
+    status: statusInput.value,
+    genres: genreInput.value.split(","),
+    pages: Number(pagesInput.value),
+    currentPage: Number(currentPageInput.value),
+    rating: Number(ratingInput.value),
+    image: imageInput.value.trim(),
+    file: fileInput.value.trim(),
+    notes: notesInput.value.trim(),
   };
 }
 

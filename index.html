@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,16 +16,18 @@
   <meta name="theme-color" content="#fff" />
 
   <!--Content Security Policy (CSP)-->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self';script-src 'self';style-src 'self' 'unsafe-inline';img-src 'self' data: blob:;font-src 'self' data:;connect-src 'self' https: ws: wss:;object-src 'none';base-uri 'self';form-action 'self';frame-ancestors 'none';upgrade-insecure-requests;"/>
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self';script-src 'self';style-src 'self' 'unsafe-inline';img-src 'self' data: blob:;font-src 'self' data:;connect-src 'self' https: ws: wss:;object-src 'none';base-uri 'self';form-action 'self';frame-ancestors 'none';upgrade-insecure-requests;" />
   <!--Referrer Policy-->
-  <meta name="referrer" content="strict-origin-when-cross-origin"/>
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <!-- Permissions Policy-->
-  <meta http-equiv="Permissions-Policy" content="camera=(),microphone=(),geolocation=(),payment=(),usb=(),accelerometer=(),gyroscope=(),magnetometer=()"/>
+  <meta http-equiv="Permissions-Policy"
+    content="camera=(),microphone=(),geolocation=(),payment=(),usb=(),accelerometer=(),gyroscope=(),magnetometer=()" />
   <!-- HSTS (somente se usar HTTPS, configurar no servidor) -->
   <!-- <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains"> -->
 
   <!--Favicon-->
-  <link rel="icon" type="image/x-icon" href="src/assets/icons/favicon.ico"/>
+  <link rel="icon" type="image/x-icon" href="src/assets/icons/favicon.ico" />
   <!--Aurora CSS-->
   <link rel="stylesheet" href="src/vendor/aurora/reset.css" />
   <link rel="stylesheet" href="src/vendor/aurora/themes.css" />
@@ -33,15 +36,113 @@
   <!--Aurora JS-->
   <script type="module" src="src/vendor/aurora/aurora.js"></script>
   <!--CSS-->
-  <link rel="stylesheet" href="src/styles/app.css"/>
+  <link rel="stylesheet" href="src/styles/app.css" />
   <!--Scripts-->
   <script type="module" src="dist/main.js"></script>
 </head>
-<body>
-	<header></header>
 
-	<main></main>
-	
-	<footer></footer>
+<body>
+  <!--navbar -------------------------------------------------------->
+  <header class="navbar">
+    <nav class="navbar__content" aria-label="Main navigation">
+      <a href="#" class="navbar__logo">My <strong>Book</strong> Library</a>
+      <select class="theme-selector">
+        <option value="aurora-light">Aurora Light</option>
+        <option value="aurora-dark">Aurora Dark</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+        <option value="light-teal">Light Teal</option>
+        <option value="dark-teal">Dark Teal</option>
+        <option value="coffee">Coffee</option>
+        <option value="paper">Paper</option>
+        <option value="neumorphism">Neumorphism</option>
+        <option value="glass">Glass</option>
+        <option value="forest">Forest</option>
+        <option value="nord">Nord</option>
+        <option value="sakura">Sakura</option>
+        <option value="gold">Gold</option>
+      </select>
+      <button class="navbar__toggle">☰</button>
+    </nav>
+  </header>
+  <!--panel layout -------------------------------------------------------->
+  <div class="panel-layout">
+    <!--main content ------------------------------------------------------->
+    <main>
+      <h1>Meus Livros</h1>
+    </main>
+
+    <!--aside-->
+    <aside class="panel-right">
+      <button class="panel-toggle" type="button">❮</button>
+
+      <h2>Novo livro</h2>
+
+      <form id="book-form">
+        <label for="imageInput">Capa</label>
+        <input id="imageInput" type="file" accept="image/*">
+        <!--nameInput-->
+        <div class="field">
+          <input id="nameInput" type="text" placeholder="">
+          <label for="nameInput">Nome</label>
+        </div>
+        <!--authorInput-->
+        <div class="field">
+          <input id="authorInput" type="text" placeholder="">
+          <label for="authorInput">Autor</label>
+        </div>
+        <!--statusInput-->
+        <label for="statusInput">Status</label>
+        <select id="statusInput">
+          <option value="Não Lido">Não Lido</option>
+          <option value="Lendo">Lendo</option>
+          <option value="Concluído">Concluído</option>
+          <option value="Abandonado">Abandonado</option>
+        </select>
+        <!--genreInput-->
+        <div class="field">
+          <input id="genreInput" type="text" placeholder="">
+          <label for="genreInput">Gênero</label>
+        </div>
+        <!--grid pages-->
+        <div class="grid-2">
+          <!--currentPageInput-->
+          <div class="field">
+            <input id="currentPageInput" type="number" min="0" placeholder="">
+            <label for="currentPageInput">Página atual</label>
+          </div>
+          <!--pagesInput-->
+          <div class="field">
+            <input id="pagesInput" type="number" min="0" placeholder="">
+            <label for="pagesInput">Quantidade de páginas</label>
+          </div>
+        </div>
+        <!--ratingInput-->
+        <label for="ratingInput">Nota</label>
+        <select id="ratingInput">
+          <option value="0">Sem nota</option>
+          <option value="1">★☆☆☆☆</option>
+          <option value="2">★★☆☆☆</option>
+          <option value="3">★★★☆☆</option>
+          <option value="4">★★★★☆</option>
+          <option value="5">★★★★★</option>
+        </select>
+        <!--fileInput-->
+        <label for="fileInput">PDF</label>
+        <input id="fileInput" type="file" accept="application/pdf">
+        <!--notesInput-->
+        <textarea id="notesInput" rows="5"></textarea>
+        <!--button-->
+        <button type="submit">Salvar</button>
+      </form>
+
+    </aside>
+
+
+
+  </div>
+
+  <footer></footer>
 </body>
+
 </html>

@@ -1,4 +1,4 @@
-import { BookStatus } from "./book-status";
+import type { BookStatus } from "./book-status";
 
 export type Book = {
    id: number;
