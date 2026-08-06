@@ -1,11 +1,11 @@
-import { BookStatus } from "./BookStatus";
+import { BookStatus } from "./book-status";
 
 export type Book = {
    id: number;
    name: string;
    author: string;
-   Status: BookStatus;
-   genre: string[];
+   status: BookStatus;
+   genres: string[];
    pages: number;
    currentPage: number;
    rating: number;
