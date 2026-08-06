@@ -1,11 +1,12 @@
 // Imports ===========================================================
 import type { Book } from "../types/book.js";
+import type { BookStatus } from "../types/book-status.js";
 import * as BookService from "../services/book-service.js";
 
 // Variables =========================================================
 
 // Initialization ====================================================
-export function initComponentName(): void {
+export function initBookForm(): void {
   initEvents();
 
 }
@@ -13,25 +14,52 @@ export function initComponentName(): void {
 // Events ============================================================
 function initEvents(): void {
   //onSubmit
-  const form = document.querySelector<HTMLFormElement>("#form");
-  if (!form) { throw new Error('"#form" element not found.');}
- 
+  const form = document.querySelector<HTMLFormElement>("#book-form");
+  if (!form) { throw new Error('"#book-form" element not found.');}
   form.addEventListener("submit", onSubmit);
 }
 
 // getFormData =======================================================
 function getFormData(): Book {
   const nameInput = document.querySelector<HTMLInputElement>("#nameInput");
-  if (!nameInput) { throw new Error('"#nameInput" element not found.');}
-  const numberInput = document.querySelector<HTMLInputElement>("#numberInput");
-  if (!numberInput) {throw new Error('"#numberInput" element not found.');}
+  if (!nameInput) { throw new Error('"#nameInput" element not found.'); }
+
+  const authorInput = document.querySelector<HTMLInputElement>("#authorInput");
+  if (!authorInput) { throw new Error('"#authorInput" element not found.'); }
+
+  const statusInput = document.querySelector<HTMLSelectElement>("#statusInput");
+  if (!statusInput) { throw new Error('"#statusInput" element not found.'); }
+
+  const genreInput = document.querySelector<HTMLInputElement>("#genreInput");
+  if (!genreInput) { throw new Error('"#genreInput" element not found.'); }
+
+  const pagesInput = document.querySelector<HTMLInputElement>("#pagesInput");
+  if (!pagesInput) { throw new Error('"#pagesInput" element not found.'); }
+
+  const currentPageInput = document.querySelector<HTMLInputElement>("#currentPageInput");
+  if (!currentPageInput) { throw new Error('"#currentPageInput" element not found.'); }
+
+  const ratingInput = document.querySelector<HTMLSelectElement>("#ratingInput");
+  if (!ratingInput) { throw new Error('"#ratingInput" element not found.'); }
+
+  const imageInput = document.querySelector<HTMLInputElement>("#imageInput");
+  if (!imageInput) { throw new Error('"#imageInput" element not found.'); }
+
+  const fileInput = document.querySelector<HTMLInputElement>("#fileInput");
+  if (!fileInput) { throw new Error('"#fileInput" element not found.'); }
+
+  const notesInput = document.querySelector<HTMLTextAreaElement>("#notesInput");
+  if (!notesInput) { throw new Error('"#notesInput" element not found.'); }
 
   return {
     id: 0,
     name: nameInput.value.trim(),
     author: authorInput.value.trim(),
-    status: statusInput.value,
-    genres: genreInput.value.split(","),
+    status: statusInput.value as BookStatus,
+    genres: genreInput.value
+      .split(",")
+      .map(genre => genre.trim())
+      .filter(Boolean),
     pages: Number(pagesInput.value),
     currentPage: Number(currentPageInput.value),
     rating: Number(ratingInput.value),
@@ -46,9 +74,9 @@ function onSubmit(event: SubmitEvent): void {
   event.preventDefault();
 
   const data = getFormData();
-  if (!validate(data)) {return;}
+  if (!validate(data)) { return; }
 
-  serviceName.create(data);
+  BookService.create(data);
   clearForm();
 }
 
@@ -64,18 +92,45 @@ function validate(data: Book): boolean {
 // clearForm ===========================================================
 // Clears all form fields.
 function clearForm(): void {
-  const form = document.querySelector<HTMLFormElement>("#form");
-  if (!form) { throw new Error('#form element not found.');}
+  const form = document.querySelector<HTMLFormElement>("#book-form");
+  if (!form) { throw new Error('#book-form element not found.');}
 
   form.reset();
 }
 
-// setFormFieldData =====================================================
+// setFormFieldData ==================================================
 // Fills the form fields with data.
 export function setFormFieldData(data: Book): void {
   const nameInput = document.querySelector<HTMLInputElement>("#nameInput");
-  const numberInput = document.querySelector<HTMLInputElement>("#numberInput");
-  if (!nameInput || !numberInput) { throw new Error("Form fields not found.");}
+  if (!nameInput) { throw new Error('"#nameInput" element not found.'); }
+
+  const authorInput = document.querySelector<HTMLInputElement>("#authorInput");
+  if (!authorInput) { throw new Error('"#authorInput" element not found.'); }
+
+  const statusInput = document.querySelector<HTMLSelectElement>("#statusInput");
+  if (!statusInput) { throw new Error('"#statusInput" element not found.'); }
+
+  const genreInput = document.querySelector<HTMLInputElement>("#genreInput");
+  if (!genreInput) { throw new Error('"#genreInput" element not found.'); }
+
+  const pagesInput = document.querySelector<HTMLInputElement>("#pagesInput");
+  if (!pagesInput) { throw new Error('"#pagesInput" element not found.'); }
+
+  const currentPageInput = document.querySelector<HTMLInputElement>("#currentPageInput");
+  if (!currentPageInput) { throw new Error('"#currentPageInput" element not found.'); }
+
+  const ratingInput = document.querySelector<HTMLSelectElement>("#ratingInput");
+  if (!ratingInput) { throw new Error('"#ratingInput" element not found.'); }
+
+  const notesInput = document.querySelector<HTMLTextAreaElement>("#notesInput");
+  if (!notesInput) { throw new Error('"#notesInput" element not found.'); }
+
   nameInput.value = data.name;
-  numberInput.value = String(data.number);
+  authorInput.value = data.author;
+  statusInput.value = data.status;
+  genreInput.value = data.genres.join(", ");
+  pagesInput.value = String(data.pages);
+  currentPageInput.value = String(data.currentPage);
+  ratingInput.value = String(data.rating);
+  notesInput.value = data.notes;
 }
