@@ -1,9 +1,10 @@
-//Example:
-//import { initNameFunction } from './components/name-component.js';
+import { initBookForm } from "./components/book-form.js";
+import { initBookList } from "./components/book-list.js";
 
 // init functions ====================================================
-//document.addEventListener("DOMContentLoaded", init);
+document.addEventListener("DOMContentLoaded", init);
 
-//function init(): void {
-    //initNameFunction();
-//}
+function init(): void {
+  initBookForm();
+  initBookList();
+}
